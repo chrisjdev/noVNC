@@ -961,7 +961,7 @@ export default class RFB extends EventTargetMixin {
     _negotiate_std_vnc_auth() {
         if (this._sock.rQwait("auth challenge", 16)) { return false; }
 
-        if (!this._rfb_credentials.password) {
+        if (this._rfb_credentials.password === undefined) {
             this.dispatchEvent(new CustomEvent(
                 "credentialsrequired",
                 { detail: { types: ["password"] } }));
